@@ -13,6 +13,18 @@ function view(count) {
   </ul>
 }
 
+function flatten(arr) {
+  return [].concat(...arr)
+}
+
+function h(type, props, ...children) {
+  return {
+    type,
+    props: props || {},
+    children: flatten(children)
+  }
+}
+
 // 创建节点
 function createElement(node) {
   if (typeof(node) === 'string') {
@@ -133,6 +145,7 @@ function diffChildren(newNode, oldNode) {
 }
 
 function patch(parent, patches, index = 0) {
+  console.log(parent, patches, index)
   // 当patches不存在时，直接return，不进行任何操作
   if (!patches) {
     return
